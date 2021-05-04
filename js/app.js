@@ -15,6 +15,14 @@ function loadEventListeners() {
 
   shopCart.addEventListener("click", removeCourse);
 
+  //muestra los cursos del localstorage
+
+  document.addEventListener("DOMContentLoaded", () => {
+    productsCart = JSON.parse(localStorage.getItem("shopcart")) || [];
+
+    showCart();
+  });
+
   //vaciar todo el carrito de compra
 
   emptyCartBtn.addEventListener("click", () => {
@@ -103,6 +111,13 @@ function showCart() {
     // agrega html al tbody
     containerCart.appendChild(row);
   });
+
+  //add courses to local storage
+  syncUpStorage();
+}
+
+function syncUpStorage() {
+  localStorage.setItem("shopcart", JSON.stringify(productsCart));
 }
 
 //eliminar los cursos del tbody
